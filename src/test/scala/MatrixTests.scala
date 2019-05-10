@@ -37,15 +37,4 @@ class MatrixTests extends FlatSpec {
 
     assert(Matrix.areEqual(result, expected))
   }
-  "Matrix" should "be able to be traversed" in {
-    val a: Matrix = new Matrix(2,3)
-    val expected: Matrix = new Matrix(2,3)
-
-    a.data_=(Array(Array(1,2,3),Array(4,5,6)))
-    expected.data_=(Array(Array(3,4,5),Array(6,7,8)))
-
-    val result: Matrix = a.transform(x => x + 2)
-
-    assert(Matrix.areEqual(result, expected))
-  }
 }
