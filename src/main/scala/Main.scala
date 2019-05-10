@@ -1,3 +1,5 @@
+import MatrixSource._
+
 object Main {
   def main(args: Array[String]): Unit = {
     val m: Matrix = new Matrix(2, 3)
@@ -11,7 +13,7 @@ object Main {
     res.printMat()
 
     var newMat = m.transpose
-    newMat = newMat.transform(x => x - 1)
+    newMat = newMat.transform(x => x + 100)
     newMat.printMat()
 
     try {
