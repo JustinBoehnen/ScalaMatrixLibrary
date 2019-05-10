@@ -37,6 +37,14 @@ class Matrix(val _rows: Int, val _cols: Int) {
     matrix
   }
 
+  def traverse (func: Int => Unit): Unit = {
+    for(i <- 0 until _rows) {
+      for(j <- 0 until _cols) {
+        func(_data(i)(j))
+      }
+    }
+  }
+
   def transform (func: Int => Int): Matrix = {
     val newData: Array[Array[Int]] = Array.ofDim(_rows, _cols)
 
