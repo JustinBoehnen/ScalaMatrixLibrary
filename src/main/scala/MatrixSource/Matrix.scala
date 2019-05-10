@@ -10,13 +10,13 @@ Methods:
     on the matrix; returns a new matrix
 */
 class Matrix(val _rows: Int, val _cols: Int) {
-  private var _data: Array[Array[Int]] = Array.ofDim(_rows, _cols)
+  private var _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)
 
   def rows: Int = _rows
   def cols: Int = _cols
 
-  def data:Array[Array[Int]] = _data
-  def data_= (value: Array[Array[Int]]): Unit = {
+  def data:Array[Array[Double]] = _data
+  def data_= (value: Array[Array[Double]]): Unit = {
     if(value.length != _rows) throw new MatrixException("Incorrect X Dimensions")
     for (list <- value) if (list.length != _cols) throw new MatrixException("Incorrect Y Dimensions")
 
@@ -24,7 +24,7 @@ class Matrix(val _rows: Int, val _cols: Int) {
   }
 
   def transpose: Matrix = {
-    val newData: Array[Array[Int]] = Array.ofDim(_cols, _rows)
+    val newData: Array[Array[Double]] = Array.ofDim(_cols, _rows)
 
     for (i <- 0 until _rows) {
       for (j <- 0 until _cols) {
@@ -37,7 +37,7 @@ class Matrix(val _rows: Int, val _cols: Int) {
     matrix
   }
 
-  def traverse (func: Int => Unit): Unit = {
+  def traverse (func: Double => Unit): Unit = {
     for(i <- 0 until _rows) {
       for(j <- 0 until _cols) {
         func(_data(i)(j))
@@ -45,8 +45,8 @@ class Matrix(val _rows: Int, val _cols: Int) {
     }
   }
 
-  def transform (func: Int => Int): Matrix = {
-    val newData: Array[Array[Int]] = Array.ofDim(_rows, _cols)
+  def transform (func: Double => Double): Matrix = {
+    val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
 
     for(i <- 0 until _rows) {
       for(j <- 0 until _cols) {
@@ -68,7 +68,7 @@ object Matrix {
   def add(lvalue: Matrix, rvalue: Matrix): Matrix = {
     if (lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols) throw new MatrixException("Cannot add matrices of differing degrees")
 
-    val newData: Array[Array[Int]] = Array.ofDim(lvalue.rows, lvalue.cols)
+    val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, lvalue.cols)
 
     for(i <- 0 until lvalue.rows) {
       for (j <- 0 until lvalue.cols) {
