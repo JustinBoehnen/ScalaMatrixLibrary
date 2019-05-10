@@ -72,4 +72,19 @@ object Matrix {
     newMatrix.data_=(newData)
     newMatrix
   }
+
+  def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean = {
+    var isEqual: Boolean = true
+
+    if(lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols) isEqual = false
+    else {
+      for (i <- 0 until lvalue.rows) {
+        for (j <- 0 until lvalue.cols) {
+          if (lvalue.data(i)(j) != rvalue.data(i)(j)) isEqual = false
+        }
+      }
+    }
+    
+    isEqual
+  }
 }
