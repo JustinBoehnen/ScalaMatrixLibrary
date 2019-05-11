@@ -55,6 +55,8 @@ class Matrix(val _rows: Int, val _cols: Int) {
   }
 
   def printMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
+
+  def index(x: Int, y: Int): Double = { _data(x)(y) }
 }
 
 object Matrix {
