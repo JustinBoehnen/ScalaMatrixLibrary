@@ -11,7 +11,7 @@ public class MatrixPanelWithLabels extends ScrollPane implements IMatrixPanel {
     private GridBagConstraints gc = new GridBagConstraints();
 
     public MatrixPanelWithLabels(){
-        _matrix = new Matrix(3,3);
+        _matrix = new Matrix(3,3, new double[][]{});
         this.setPreferredSize(new Dimension(250, 250));
         Draw();
     }
@@ -49,7 +49,7 @@ public class MatrixPanelWithLabels extends ScrollPane implements IMatrixPanel {
 
     public void ResetMatrix(int rows, int cols){
         try {
-            _matrix = new Matrix(rows, cols);
+            _matrix = new Matrix(rows, cols, new double[][]{});
         }
         catch (Exception err){
             JOptionPane.showMessageDialog(null, "ResetMatrix:\n"
