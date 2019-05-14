@@ -132,4 +132,12 @@ object Matrix {
 
     isEqual
   }
+
+  def identity(dim: Int): Matrix = {
+    val newData: Array[Array[Double]] = Array.ofDim(dim, dim)
+
+    for (i <- 0 until dim) newData(i)(i) = 1
+
+    new Matrix(dim, dim)(newData)
+  }
 }
