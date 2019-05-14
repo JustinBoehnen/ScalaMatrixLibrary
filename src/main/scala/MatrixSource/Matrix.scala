@@ -99,22 +99,22 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
 }
 
 /*
-Class: Matrix (static)
+Object: Matrix - companion class
 
 Methods:
   def add(lvalue: Matrix, rvalue: Matrix): Matrix - adds two
-    matrices together, returning the resulting matrix.
+    matrices together, returning the resulting matrix
   def subtract(lvalue: Matrix, rvalue: Matrix): Matrix - subtracts
     rvalue matrix from lvalue matrix, returning the resulting
-    matrix.
+    matrix
   def multiply(lvalue: Matrix, rvalue: Matrix): Matrix - multiplies
     two matrices together, returning the cross product of the
-    matrices.
+    matrices
   def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean - evaluates
     whether lvalue and rvalue are identical matrices and returns the
-    verdict.
+    verdict
   def identity(dim: Int): Matrix - returns and identity matrix of
-    size dim.
+    size dim
 */
 object Matrix {
   def add(lvalue: Matrix, rvalue: Matrix): Matrix = {
