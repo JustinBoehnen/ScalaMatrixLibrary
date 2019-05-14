@@ -11,8 +11,7 @@ import java.awt.event.ActionListener;
 public class OperationsPanel extends JPanel {
     private JButton addButton = new JButton("ADD");
     private JButton subButton = new JButton("SUB");
-    private JButton crossButton = new JButton("CROSS");
-    private JButton dotButton = new JButton("DOT");
+    private JButton multiplyButton = new JButton("MULTIPLY");
 
     public OperationsPanel(IMatrixPanel left, IMatrixPanel right){
         this.setPreferredSize(new Dimension(250, 250));
@@ -45,7 +44,7 @@ public class OperationsPanel extends JPanel {
                 }
             }
         });
-        crossButton.addActionListener(new ActionListener() {
+        multiplyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -54,19 +53,6 @@ public class OperationsPanel extends JPanel {
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "crossButton.addActionListener:\n"
-                            + "[" + err.getMessage() + "]", "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-        dotButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    left.StoreData(); right.StoreData();
-                    ResultFrame res = new ResultFrame(Matrix.dotProduct(left.GetMatrix(), right.GetMatrix()), "Dot Product");
-                }
-                catch (Exception err){
-                    JOptionPane.showMessageDialog(null, "dotButton.addActionListener:\n"
                             + "[" + err.getMessage() + "]", "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -87,9 +73,6 @@ public class OperationsPanel extends JPanel {
         this.add(subButton,gc);
 
         gc.gridx = 0; gc.gridy = 2;
-        this.add(crossButton,gc);
-
-        gc.gridx = 0; gc.gridy = 3;
-        this.add(dotButton,gc);
+        this.add(multiplyButton,gc);
     }
 }
