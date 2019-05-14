@@ -21,7 +21,9 @@ public class ResultFrame extends JFrame {
     }
 
     public void Draw(){
-        this.add(new MatrixPanel(_matrix));
+        MatrixPanelWithLabels resPan = new MatrixPanelWithLabels();
+        resPan.SetMatrix(_matrix);
+        this.add(resPan);
         this.setVisible(true);
     }
 }

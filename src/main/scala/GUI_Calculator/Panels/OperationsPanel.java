@@ -16,7 +16,7 @@ public class OperationsPanel extends JPanel {
     private JButton crossButton = new JButton("CROSS");
     private JButton dotButton = new JButton("DOT");
 
-    public OperationsPanel(MatrixPanel left, MatrixPanel right){
+    public OperationsPanel(MatrixPanelWithLabels left, MatrixPanelWithLabels right){
         this.setPreferredSize(new Dimension(_xSize, _ySize));
         Draw();
 
@@ -29,7 +29,7 @@ public class OperationsPanel extends JPanel {
                     ResultFrame res = new ResultFrame(Matrix.add(left.GetMatrix(), right.GetMatrix()), "Addition");
                 }
                 catch (Exception err){
-                    JOptionPane.showMessageDialog(null, "You just had to go and break our stuff...\n"
+                    JOptionPane.showMessageDialog(null, "addButton.addActionListener:\n"
                             + "[" + err.getMessage() + "]", "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -42,7 +42,7 @@ public class OperationsPanel extends JPanel {
                     ResultFrame res = new ResultFrame(Matrix.subtract(left.GetMatrix(), right.GetMatrix()), "Subtraction");
                 }
                 catch (Exception err){
-                    JOptionPane.showMessageDialog(null, "You just had to go and break our stuff...\n"
+                    JOptionPane.showMessageDialog(null, "subButton.addActionListener:\n"
                             + "[" + err.getMessage() + "]", "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -55,7 +55,7 @@ public class OperationsPanel extends JPanel {
                     ResultFrame res = new ResultFrame(Matrix.crossProduct(left.GetMatrix(), right.GetMatrix()), "Cross Product");
                 }
                 catch (Exception err){
-                    JOptionPane.showMessageDialog(null, "You just had to go and break our stuff...\n"
+                    JOptionPane.showMessageDialog(null, "crossButton.addActionListener:\n"
                             + "[" + err.getMessage() + "]", "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -68,7 +68,7 @@ public class OperationsPanel extends JPanel {
                     ResultFrame res = new ResultFrame(Matrix.dotProduct(left.GetMatrix(), right.GetMatrix()), "Dot Product");
                 }
                 catch (Exception err){
-                    JOptionPane.showMessageDialog(null, "You just had to go and break our stuff...\n"
+                    JOptionPane.showMessageDialog(null, "dotButton.addActionListener:\n"
                             + "[" + err.getMessage() + "]", "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
                 }
             }

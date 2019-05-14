@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MatrixSettingsPanel extends JPanel {
-    private MatrixPanel _panel;
+    private MatrixPanelWithLabels _panel;
     private int _xSize = 250;
     private int _ySize = 250;
 
@@ -16,7 +16,7 @@ public class MatrixSettingsPanel extends JPanel {
     private JTextField colsText = new JTextField(6);
     private JButton resetButton = new JButton("RESET");
 
-    public MatrixSettingsPanel(MatrixPanel panel){
+    public MatrixSettingsPanel(MatrixPanelWithLabels panel){
         _panel = panel;
         this.setPreferredSize(new Dimension(_xSize, _ySize));
         Draw();
@@ -28,15 +28,19 @@ public class MatrixSettingsPanel extends JPanel {
                     int rows = Integer.parseInt(rowsText.getText());
                     int cols = Integer.parseInt(colsText.getText());
 
-                    if(rows > 100 || cols > 100 || rows < 1 || cols < 1)
-                        JOptionPane.showMessageDialog(null, "Stop trying to break it!\n"
-                                + "[You weren't really going to use a " + rows + "x"
-                                + cols + " matrix]", "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
+                    if(rows > 100 || cols > 100)
+                        JOptionPane.showMessageDialog(null, "resetButton.addActionListener:\n"
+                                + "[Maximum matrix dimensions limited to 100x100 for app performace]",
+                                "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
+                    else if(rows < 1 || cols < 1)
+                        JOptionPane.showMessageDialog(null, "resetButton.addActionListener:\n"
+                                        + "[Matrix dimension must be at least 1]",
+                                "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
                     else
                         _panel.ResetMatrix(rows, cols);
                 }
                 catch (Exception err){
-                    JOptionPane.showMessageDialog(null, "You just had to go and break our stuff...\n"
+                    JOptionPane.showMessageDialog(null, "resetButton.addActionListener:\n"
                             + "[" + err.getMessage() + "]", "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
                 }
             }

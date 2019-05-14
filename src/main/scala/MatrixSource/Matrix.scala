@@ -17,8 +17,17 @@ class Matrix(val _rows: Int, val _cols: Int) {
 
   def data:Array[Array[Double]] = _data
   def data_= (value: Array[Array[Double]]): Unit = {
-    if(value.length != _rows) throw new MatrixException("Incorrect X Dimensions")
-    for (list <- value) if (list.length != _cols) throw new MatrixException("Incorrect Y Dimensions")
+    var rowWrong: Int = 0;
+    var colWrong: Int = 0;
+    if(value.length != _rows) rowWrong = 1;
+    for (list <- value) if (list.length != _cols) colWrong = 1;
+
+    if(rowWrong == 1 && colWrong == 1)
+      throw new MatrixException("Incorrect row and column assignment dimensions: expected row:" + _rows + ", col:" + _cols);
+    else if (rowWrong == 1)
+      throw new MatrixException("Incorrect row assignment dimension: expected " + _rows);
+    else if (colWrong == 1)
+      throw new MatrixException("Incorrect column assignment dimension: expected " + _cols);
 
     _data = value
   }
@@ -56,7 +65,10 @@ class Matrix(val _rows: Int, val _cols: Int) {
 
   def printMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
 
-  def index(x: Int, y: Int): Double = { _data(x)(y) }
+  def index(x: Int, y: Int): Double = {
+    if(x >= _rows || x < 0 || y >= _cols || y < 0) throw new MatrixException("Index out of bounds");
+    _data(x)(y)
+  }
 }
 
 object Matrix {
@@ -77,7 +89,7 @@ object Matrix {
 
   def subtract(lvalue: Matrix, rvalue: Matrix): Matrix = {
     if (lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols)
-      throw new MatrixException("Cannot add matrices of differing degrees")
+      throw new MatrixException("Cannot subtract matrices of differing degrees")
 
     val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, lvalue.cols)
 
@@ -91,7 +103,7 @@ object Matrix {
   }
 
   def crossProduct(lvalue: Matrix, rvalue: Matrix): Matrix = {
-    if (lvalue.cols != rvalue.rows) throw new MatrixException("Column on lvalue must equal row on rvalue")
+    if (lvalue.cols != rvalue.rows) throw new MatrixException("cross product lvalue columns must equal rvalue rows")
 
     val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, rvalue.cols)
 

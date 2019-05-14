@@ -1,9 +1,6 @@
 package GUI_Calculator;
 
-import GUI_Calculator.Panels.ConsolePanel;
-import GUI_Calculator.Panels.MatrixPanel;
-import GUI_Calculator.Panels.MatrixSettingsPanel;
-import GUI_Calculator.Panels.OperationsPanel;
+import GUI_Calculator.Panels.*;
 import MatrixSource.Matrix;
 
 import java.awt.*;
@@ -18,8 +15,8 @@ public class MainFrame extends JFrame {
         //double[][] testData = {{1,4,7},{2,5,8},{3,6,9}};
 
         //data
-        Matrix _left = new Matrix(3,3);
-        Matrix _right = new Matrix(3,3);
+        //Matrix _left = new Matrix(3,3);
+        //Matrix _right = new Matrix(3,3);
 
         //_left.data_$eq(testData);
         //_right.data_$eq(testData);
@@ -33,8 +30,10 @@ public class MainFrame extends JFrame {
         GridBagConstraints gc = new GridBagConstraints();
 
         //panels
-        MatrixPanel leftMatrix = new MatrixPanel(_left);
-        MatrixPanel rightMatrix = new MatrixPanel(_right);
+        //MatrixPanel leftMatrix = new MatrixPanel();
+        //MatrixPanel rightMatrix = new MatrixPanel();
+        MatrixPanelWithLabels leftMatrix = new MatrixPanelWithLabels();
+        MatrixPanelWithLabels rightMatrix = new MatrixPanelWithLabels();
         MatrixSettingsPanel leftSettings = new MatrixSettingsPanel(leftMatrix);
         MatrixSettingsPanel rightSettings = new MatrixSettingsPanel(rightMatrix);
         OperationsPanel opPanel = new OperationsPanel(leftMatrix, rightMatrix);
