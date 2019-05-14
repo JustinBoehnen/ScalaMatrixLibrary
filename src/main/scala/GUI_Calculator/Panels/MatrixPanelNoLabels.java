@@ -45,7 +45,7 @@ public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
 
     public void ResetMatrix(int rows, int cols){
         try {
-            _matrix = new Matrix(rows, cols, new double[3][3]);
+            _matrix = new Matrix(rows, cols, new double[rows][cols]);
         }
         catch (Exception err){
             JOptionPane.showMessageDialog(null, "ResetMatrix\n"
@@ -64,7 +64,7 @@ public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
                     count++;
                 }
             }
-            _matrix.data_$eq(data);
+            _matrix = new Matrix(_matrix.rows(), _matrix.cols(), data);
         }
         catch (Exception err){
             JOptionPane.showMessageDialog(null, "StoreData\n"
