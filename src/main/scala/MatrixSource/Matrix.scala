@@ -1,5 +1,7 @@
 package MatrixSource
 
+import scala.runtime.Nothing$
+
 /*
 Class: Matrix
 
@@ -10,7 +12,7 @@ Methods:
   def transpose: Matrix - does the transpose operation
     on the matrix; returns a new matrix
 */
-class Matrix(val _rows: Int, val _cols: Int)(var _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)) {
+class Matrix(val _rows: Int, val _cols: Int)( var _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)) {
   def rows: Int = _rows
   def cols: Int = _cols
 
