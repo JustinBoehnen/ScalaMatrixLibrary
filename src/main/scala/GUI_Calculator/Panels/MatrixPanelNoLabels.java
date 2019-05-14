@@ -12,6 +12,7 @@ public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
 
     public MatrixPanelNoLabels(){
         _matrix = new Matrix(3,3, new double[3][3]);
+
         this.setPreferredSize(new Dimension(250, 250));
         Draw();
     }
@@ -71,4 +72,3 @@ public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
         }
     }
 }
-

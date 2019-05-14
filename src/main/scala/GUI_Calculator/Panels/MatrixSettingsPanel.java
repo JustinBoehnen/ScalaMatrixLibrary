@@ -68,4 +68,3 @@ public class MatrixSettingsPanel extends JPanel {
         this.add(resetButton,gc);
     }
 }
-

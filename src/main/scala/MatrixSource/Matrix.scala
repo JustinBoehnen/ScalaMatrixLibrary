@@ -49,7 +49,6 @@ class Matrix(val _rows: Int, val _cols: Int)( var _data: Array[Array[Double]] = 
         func(_data(row)(col))
   }
 
-
   def transform (func: Double => Double): Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
 

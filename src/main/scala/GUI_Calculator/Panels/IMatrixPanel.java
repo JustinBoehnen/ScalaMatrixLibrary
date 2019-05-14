@@ -13,4 +13,3 @@ public interface IMatrixPanel {
     void ResetMatrix(int rows, int cols);
     void StoreData();
 }
-
