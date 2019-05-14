@@ -118,7 +118,7 @@ object Matrix {
         for (lcol <- 0 until lvalue.cols)
           newData(lrow)(rcol) += lvalue.data(lrow)(lcol) * rvalue.data(lcol)(rcol)
 
-    new Matrix(lvalue.rows, rvalue.cols)()
+    new Matrix(lvalue.rows, rvalue.cols)(newData)
   }
 
   def dotProduct(lvalue: Matrix, rvalue: Matrix): Matrix = {
