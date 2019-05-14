@@ -3,20 +3,36 @@ package MatrixSource
 /*
 Class: Matrix
 
+Getters / Setters:
+  def Rows: Int - getter for _rows
+  def Cols: Int - getter for _cols
+  def Data: Array[Array[Double]] - getter for _data
+
 Methods:
-  def rows: Int - getter for _rows
-  def cols: Int - getter for _cols
-  def data_= (value: Array[Array[Int]]): Unit - setter for _data
-  def transpose: Matrix - does the transpose operation
-    on the matrix; returns a new matrix
+  def Transpose: Matrix - transposes the matrix, turning
+    all rows into columns and columns into rows
+  def Traverse (func: Double => Unit): Unit - traverses the matrix,
+    calling func on each object
+  def Transform (func: Double => Double): Matrix - creates a new
+    matrix with the values in the current matrix transformed by
+    func
+  def RowSwap (rowA: Int, rowB: Int): Matrix - returns a new matrix
+    with the specified rows swapped
+  def ReduceSum: Matrix - adds the values in each row up and returns
+    a new matrix
+  def PrintMat: Unit - prints the matrix
+  def Index (row: Int, col: Int): Double - returns the element at
+    the given index
+  def GetSize: Array[Int] - returns the size of the matrix as
+    an array of Int
 */
 class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)) {
-  def rows: Int = _rows
-  def cols: Int = _cols
+  def Rows: Int = _rows
+  def Cols: Int = _cols
 
-  def data:Array[Array[Double]] = _data
+  def Data:Array[Array[Double]] = _data
 
-  def transpose: Matrix = {
+  def Transpose: Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(_cols, _rows)
 
     for (row <- 0 until _rows)
@@ -26,13 +42,13 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
     new Matrix(_cols, _rows)(newData)
   }
 
-  def traverse (func: Double => Unit): Unit = {
+  def Traverse(func: Double => Unit): Unit = {
     for(row <- 0 until _rows)
       for(col <- 0 until _cols)
         func(_data(row)(col))
   }
 
-  def transform (func: Double => Double): Matrix = {
+  def Transform(func: Double => Double): Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
 
     for(row <- 0 until _rows)
@@ -42,7 +58,7 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
     new Matrix(_rows, _cols)(newData)
   }
 
-  def rowSwap (rowA: Int, rowB: Int): Matrix = {
+  def RowSwap(rowA: Int, rowB: Int): Matrix = {
     if (rowA >= _rows || rowA >= _rows || rowB < 0 || rowB < 0) throw new MatrixException("Specified row out of bounds")
 
     val newData: Array[Array[Double]] = _data.clone()
@@ -52,7 +68,7 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
     new Matrix(_rows, _cols)(newData)
   }
 
-  def reduceSum (): Matrix = {
+  def ReduceSum(): Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(_rows, 1)
 
     for (row <- 0 until _rows)
@@ -62,64 +78,64 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
     new Matrix(_rows, 1)(newData)
   }
 
-  def printMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
+  def PrintMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
 
-  def index(row: Int, col: Int): Double = {
+  def Index(row: Int, col: Int): Double = {
     if(row >= _rows || row < 0 || col >= _cols || col < 0) throw new MatrixException("Index out of bounds");
     _data(row)(col)
   }
 
-  def getSize(): Array[Int] = Array(_rows, _cols)
+  def GetSize(): Array[Int] = Array(_rows, _cols)
 }
 
 object Matrix {
   def add(lvalue: Matrix, rvalue: Matrix): Matrix = {
-    if (lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols)
+    if (lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols)
       throw new MatrixException("Cannot add matrices of differing degrees")
 
-    val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, lvalue.cols)
+    val newData: Array[Array[Double]] = Array.ofDim(lvalue.Rows, lvalue.Cols)
 
-    for(row <- 0 until lvalue.rows)
-      for (col <- 0 until lvalue.cols)
-        newData(row)(col) = lvalue.data(row)(col) + rvalue.data(row)(col)
+    for(row <- 0 until lvalue.Rows)
+      for (col <- 0 until lvalue.Cols)
+        newData(row)(col) = lvalue.Data(row)(col) + rvalue.Data(row)(col)
 
-    new Matrix(lvalue.rows, lvalue.cols)(newData)
+    new Matrix(lvalue.Rows, lvalue.Cols)(newData)
   }
 
   def subtract(lvalue: Matrix, rvalue: Matrix): Matrix = {
-    if (lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols)
+    if (lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols)
       throw new MatrixException("Cannot subtract matrices of differing degrees")
 
-    val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, lvalue.cols)
+    val newData: Array[Array[Double]] = Array.ofDim(lvalue.Rows, lvalue.Cols)
 
-    for(row <- 0 until lvalue.rows)
-      for (col <- 0 until lvalue.cols)
-        newData(row)(col) = lvalue.data(row)(col) - rvalue.data(row)(col)
+    for(row <- 0 until lvalue.Rows)
+      for (col <- 0 until lvalue.Cols)
+        newData(row)(col) = lvalue.Data(row)(col) - rvalue.Data(row)(col)
 
-    new Matrix(lvalue.rows, lvalue.cols)(newData)
+    new Matrix(lvalue.Rows, lvalue.Cols)(newData)
   }
 
   def multiply(lvalue: Matrix, rvalue: Matrix): Matrix = {
-    if (lvalue.cols != rvalue.rows) throw new MatrixException("cross product lvalue columns must equal rvalue rows")
+    if (lvalue.Cols != rvalue.Rows) throw new MatrixException("cross product lvalue columns must equal rvalue rows")
 
-    val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, rvalue.cols)
+    val newData: Array[Array[Double]] = Array.ofDim(lvalue.Rows, rvalue.Cols)
 
-    for (lrow <- 0 until lvalue.rows)
-      for (rcol <- 0 until rvalue.cols)
-        for (lcol <- 0 until lvalue.cols)
-          newData(lrow)(rcol) += lvalue.data(lrow)(lcol) * rvalue.data(lcol)(rcol)
+    for (lrow <- 0 until lvalue.Rows)
+      for (rcol <- 0 until rvalue.Cols)
+        for (lcol <- 0 until lvalue.Cols)
+          newData(lrow)(rcol) += lvalue.Data(lrow)(lcol) * rvalue.Data(lcol)(rcol)
 
-    new Matrix(lvalue.rows, rvalue.cols)(newData)
+    new Matrix(lvalue.Rows, rvalue.Cols)(newData)
   }
 
   def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean = {
     var isEqual: Boolean = true
 
-    if(lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols) isEqual = false
+    if(lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols) isEqual = false
     else
-      for (row <- 0 until lvalue.rows)
-        for (col <- 0 until lvalue.cols)
-          if (lvalue.data(row)(col) != rvalue.data(row)(col)) isEqual = false
+      for (row <- 0 until lvalue.Rows)
+        for (col <- 0 until lvalue.Cols)
+          if (lvalue.Data(row)(col) != rvalue.Data(row)(col)) isEqual = false
 
     isEqual
   }

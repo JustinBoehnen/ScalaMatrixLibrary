@@ -21,14 +21,14 @@ public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
         matrixPanel.setLayout(new GridBagLayout());
         matrixPanel.removeAll();
         gc.insets = new Insets(1,1,1,1);
-        for(int row = 0; row < _matrix.rows(); row++){
-            for (int col = 0; col < _matrix.cols(); col++){
-                gc.weightx = 1.0 / _matrix.cols();
-                gc.weighty = 1.0 / _matrix.rows();
+        for(int row = 0; row < _matrix.Rows(); row++){
+            for (int col = 0; col < _matrix.Cols(); col++){
+                gc.weightx = 1.0 / _matrix.Cols();
+                gc.weighty = 1.0 / _matrix.Rows();
                 gc.gridx = col;
                 gc.gridy = row;
 
-                matrixPanel.add(new JTextField(Double.toString(_matrix.index(row,col)),4), gc);
+                matrixPanel.add(new JTextField(Double.toString(_matrix.Index(row,col)),4), gc);
             }
         }
         this.add(matrixPanel);
@@ -56,15 +56,15 @@ public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
 
     public void StoreData(){
         try {
-            double[][] data = new double[_matrix.rows()][_matrix.cols()];
+            double[][] data = new double[_matrix.Rows()][_matrix.Cols()];
             int count = 0;
-            for (int row = 0; row < _matrix.rows(); row++) {
-                for (int col = 0; col < _matrix.cols(); col++) {
+            for (int row = 0; row < _matrix.Rows(); row++) {
+                for (int col = 0; col < _matrix.Cols(); col++) {
                     data[row][col] = Double.parseDouble(((JTextField) matrixPanel.getComponent(count)).getText());
                     count++;
                 }
             }
-            _matrix = new Matrix(_matrix.rows(), _matrix.cols(), data);
+            _matrix = new Matrix(_matrix.Rows(), _matrix.Cols(), data);
         }
         catch (Exception err){
             JOptionPane.showMessageDialog(null, "StoreData\n"

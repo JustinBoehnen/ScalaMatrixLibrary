@@ -55,11 +55,11 @@ public class MatrixSettingsPanel extends JPanel {
         this.add(new JLabel("Cols  "),gc);
 
         gc.gridx = 1; gc.gridy = 0;
-        rowsText.setText(Integer.toString(_panel.GetMatrix().rows()));
+        rowsText.setText(Integer.toString(_panel.GetMatrix().Rows()));
         this.add(rowsText,gc);
 
         gc.gridx = 1; gc.gridy = 1;
-        colsText.setText(Integer.toString(_panel.GetMatrix().cols()));
+        colsText.setText(Integer.toString(_panel.GetMatrix().Cols()));
         this.add(colsText,gc);
 
         gc.fill = GridBagConstraints.HORIZONTAL;

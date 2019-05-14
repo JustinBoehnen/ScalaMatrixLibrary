@@ -33,7 +33,7 @@ class MatrixTests extends FlatSpec {
     val a: Matrix = new Matrix(2,3)(Array(Array(1,2,3),Array(4,5,6)))
     val expected: Matrix = new Matrix(3,2)(Array(Array(1,4),Array(2,5),Array(3,6)))
 
-    val result: Matrix = a.transpose
+    val result: Matrix = a.Transpose
 
     assert(Matrix.areEqual(result, expected))
   }
@@ -41,7 +41,7 @@ class MatrixTests extends FlatSpec {
     val a: Matrix = new Matrix(2,3)(Array(Array(1,2,3),Array(4,5,6)))
     val expected: Matrix = new Matrix(2,3)(Array(Array(3,4,5),Array(6,7,8)))
 
-    val result: Matrix = a.transform(x => x + 2)
+    val result: Matrix = a.Transform(x => x + 2)
 
     assert(Matrix.areEqual(result, expected))
   }
@@ -49,6 +49,13 @@ class MatrixTests extends FlatSpec {
     val a: Matrix = new Matrix(3,3)(Array(Array(1,2,3),Array(4,5,6),Array(7,8,9)))
     val expected: Matrix = new Matrix(3,3)(Array(Array(7,8,9),Array(4,5,6),Array(1,2,3)))
 
-    assert(Matrix.areEqual(a.rowSwap(0, 2), expected))
+    assert(Matrix.areEqual(a.RowSwap(0, 2), expected))
+  }
+
+  "Matrix.GetSize" should "return the size of the matrix as array" in {
+    val a: Matrix = new Matrix(5, 6)()
+    val expected: Array[Int] = Array(5, 6)
+
+    assert(a.GetSize()(0) == expected(0) && a.GetSize()(1) == expected(1))
   }
 }
