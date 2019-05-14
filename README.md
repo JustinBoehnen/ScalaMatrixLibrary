@@ -6,9 +6,9 @@ Documentation
 
 **Transpose: Matrix** - this method transposes the Matrix, turning all rows into columns and columns into rows; these changes are returned in a new Matrix
 
-**Traverse: (visit: Double => Unit): Unit** - calls a visit function over every element in the Matrix
+**Traverse (visit: Double => Unit): Unit** - calls a visit function over every element in the Matrix
 
-**Transform(func: Double => Double): Matrix** - transforms every element in the Matrix with a given function; these changes are returned in a new Matrix
+**Transform (visit: Double => Double): Matrix** - creates a new matrix with the values in the current matrix transformed by visit
 
 **RowSwap(rowA: Int, rowB: Int): Matrix** - swaps the elements of two rows; these changes are returned in a new Matrix
 
