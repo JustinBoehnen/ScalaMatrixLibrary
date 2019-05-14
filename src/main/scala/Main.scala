@@ -7,5 +7,6 @@ object Main {
     val m2: Matrix = new Matrix(2, 2)(Array(Array(1, 2), Array(3, 4)))
     m2.printMat()
     Matrix.multiply(m1, m2).printMat()
+    Matrix.identity(6).printMat()
   }
 }
