@@ -50,7 +50,7 @@ public class OperationsPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     left.StoreData(); right.StoreData();
-                    ResultFrame res = new ResultFrame(Matrix.crossProduct(left.GetMatrix(), right.GetMatrix()), "Cross Product");
+                    ResultFrame res = new ResultFrame(Matrix.multiply(left.GetMatrix(), right.GetMatrix()), "Cross Product");
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "crossButton.addActionListener:\n"

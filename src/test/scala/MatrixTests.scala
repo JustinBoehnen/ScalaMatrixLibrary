@@ -25,16 +25,7 @@ class MatrixTests extends FlatSpec {
     val b: Matrix = new Matrix(3, 2)(Array(Array(1,2),Array(3,4),Array(5,6)))
     val expected: Matrix = new Matrix(2,2)(Array(Array(22,28),Array(49,64)))
 
-    val result: Matrix = Matrix.crossProduct(a,b)
-
-    assert(Matrix.areEqual(result, expected))
-  }
-  "Matrix.dotProduct" should "subtract matrix b from matrix a" in {
-    val a: Matrix = new Matrix(2,3)(Array(Array(1,2,3),Array(4,5,6)))
-    val b: Matrix = new Matrix(2, 3)(Array(Array(1,2,3),Array(4,5,6)))
-    val expected: Matrix = new Matrix(2,2)(Array(Array(14,32),Array(32,77)))
-
-    val result: Matrix = Matrix.dotProduct(a,b)
+    val result: Matrix = Matrix.multiply(a,b)
 
     assert(Matrix.areEqual(result, expected))
   }
