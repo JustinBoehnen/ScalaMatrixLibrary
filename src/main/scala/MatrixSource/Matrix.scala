@@ -58,6 +58,16 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
     new Matrix(_rows, _cols)(newData)
   }
 
+  def TransformRow(rowPassed: Int, visit: Double => Double): Matrix = {
+    val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
+
+    for (row <- 0 until _rows)
+      for (col <- 0 until _cols)
+        newData(row)(col) = if (rowPassed == row) visit(_data(row)(col)) else _data(row)(col)
+
+    new Matrix(_rows, _cols)(newData)
+  }
+
   def RowSwap(rowA: Int, rowB: Int): Matrix = {
     if (rowA >= _rows || rowA >= _rows || rowB < 0 || rowB < 0) throw new MatrixException("Specified row out of bounds")
 

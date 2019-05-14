@@ -58,4 +58,11 @@ class MatrixTests extends FlatSpec {
 
     assert(a.GetSize()(0) == expected(0) && a.GetSize()(1) == expected(1))
   }
+
+  "Matrix.TransformRow" should "transform a row with a given function" in {
+    val a: Matrix = new Matrix(2, 2)()
+    val expected: Matrix = new Matrix(2, 2)(Array(Array(1, 1), Array(0, 0)))
+
+    assert(Matrix.areEqual(a.TransformRow(0, (x) => x + 1), expected))
+  }
 }
