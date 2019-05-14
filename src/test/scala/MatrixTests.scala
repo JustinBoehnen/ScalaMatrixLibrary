@@ -45,4 +45,19 @@ class MatrixTests extends FlatSpec {
 
     assert(Matrix.areEqual(result, expected))
   }
+  "Matrix.rowSwap" should "swap two rows within a matrix" in {
+    val a: Matrix = new Matrix(3,3)(Array(Array(1,2,3),Array(4,5,6),Array(7,8,9)));
+    val expected: Matrix = new Matrix(5,5)(Array(Array(7,8,9),Array(4,5,6),Array(1,2,3)));
+
+    a.rowSwap(0, 2);
+    assert(Matrix.areEqual(a, expected));
+
+    expected.data_=(Array(Array(4,5,6),Array(7,8,9),Array(1,2,3)));
+    a.rowSwap(0, 1);
+    assert(Matrix.areEqual(a, expected));
+
+    val result: Matrix = a.transform(x => x + 2)
+
+    assert(Matrix.areEqual(result, expected))
+  }
 }
