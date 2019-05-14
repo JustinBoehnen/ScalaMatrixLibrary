@@ -11,11 +11,11 @@ Getters / Setters:
 Methods:
   def Transpose: Matrix - transposes the matrix, turning
     all rows into columns and columns into rows
-  def Traverse (func: Double => Unit): Unit - traverses the matrix,
-    calling func on each object
-  def Transform (func: Double => Double): Matrix - creates a new
+  def Traverse (visit: Double => Unit): Unit - traverses the matrix,
+    calling visit on each object
+  def Transform (visit: Double => Double): Matrix - creates a new
     matrix with the values in the current matrix transformed by
-    func
+    visit
   def RowSwap (rowA: Int, rowB: Int): Matrix - returns a new matrix
     with the specified rows swapped
   def ReduceSum: Matrix - adds the values in each row up and returns
@@ -42,18 +42,18 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
     new Matrix(_cols, _rows)(newData)
   }
 
-  def Traverse(func: Double => Unit): Unit = {
+  def Traverse(visit: Double => Unit): Unit = {
     for(row <- 0 until _rows)
       for(col <- 0 until _cols)
-        func(_data(row)(col))
+        visit(_data(row)(col))
   }
 
-  def Transform(func: Double => Double): Matrix = {
+  def Transform(visit: Double => Double): Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
 
     for(row <- 0 until _rows)
       for(col <- 0 until _cols)
-        newData(row)(col) = func(_data(row)(col))
+        newData(row)(col) = visit(_data(row)(col))
 
     new Matrix(_rows, _cols)(newData)
   }
@@ -88,6 +88,24 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
   def GetSize(): Array[Int] = Array(_rows, _cols)
 }
 
+/*
+Class: Matrix (static)
+
+Methods:
+  def add(lvalue: Matrix, rvalue: Matrix): Matrix - adds two
+    matrices together, returning the resulting matrix.
+  def subtract(lvalue: Matrix, rvalue: Matrix): Matrix - subtracts
+    rvalue matrix from lvalue matrix, returning the resulting
+    matrix.
+  def multiply(lvalue: Matrix, rvalue: Matrix): Matrix - multiplies
+    two matrices together, returning the cross product of the
+    matrices.
+  def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean - evaluates
+    whether lvalue and rvalue are identical matrices and returns the
+    verdict.
+  def identity(dim: Int): Matrix - returns and identity matrix of
+    size dim.
+*/
 object Matrix {
   def add(lvalue: Matrix, rvalue: Matrix): Matrix = {
     if (lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols)
