@@ -1,4 +1,5 @@
 package MatrixSource
+
 /*
 Class: Matrix
 
@@ -9,9 +10,7 @@ Methods:
   def transpose: Matrix - does the transpose operation
     on the matrix; returns a new matrix
 */
-class Matrix(val _rows: Int, val _cols: Int) {
-  private var _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)
-
+class Matrix(val _rows: Int, val _cols: Int)(var _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)) {
   def rows: Int = _rows
   def cols: Int = _cols
 
@@ -39,9 +38,7 @@ class Matrix(val _rows: Int, val _cols: Int) {
       for (col <- 0 until _cols)
         newData(col)(row) = _data(row)(col)
 
-    val matrix = new Matrix(_cols, _rows)
-    matrix.data_=(newData)
-    matrix
+    new Matrix(_cols, _rows)(newData)
   }
 
   def traverse (func: Double => Unit): Unit = {
@@ -58,9 +55,19 @@ class Matrix(val _rows: Int, val _cols: Int) {
       for(col <- 0 until _cols)
         newData(row)(col) = func(_data(row)(col))
 
-    val newMatrix = new Matrix(_rows, _cols)
-    newMatrix.data_=(newData)
-    newMatrix
+    new Matrix(_rows, _cols)(newData)
+  }
+
+  def rowSwap (lrow: Int, rrow: Int): Matrix = {
+    val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
+
+    if (lrow >= _rows || rrow >= _rows || lrow < 0 || rrow < 0) throw new MatrixException("Specified row out of bounds")
+    newData(rrow) = data(lrow)
+    newData(lrow) = data(rrow)
+
+    for (row <- 0 until _rows) if (row != lrow || row != rrow) newData(row) = data(row)
+
+    new Matrix(_rows, _cols)(newData)
   }
 
   def printMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
@@ -69,6 +76,8 @@ class Matrix(val _rows: Int, val _cols: Int) {
     if(row >= _rows || row < 0 || col >= _cols || col < 0) throw new MatrixException("Index out of bounds");
     _data(row)(col)
   }
+
+  def getSize(): Array[Int] = Array(_rows, _cols)
 }
 
 object Matrix {
@@ -82,9 +91,7 @@ object Matrix {
       for (col <- 0 until lvalue.cols)
         newData(row)(col) = lvalue.data(row)(col) + rvalue.data(row)(col)
 
-    val newMatrix: Matrix = new Matrix(lvalue.rows, lvalue.cols)
-    newMatrix.data_=(newData)
-    newMatrix
+    new Matrix(lvalue.rows, lvalue.cols)(newData)
   }
 
   def subtract(lvalue: Matrix, rvalue: Matrix): Matrix = {
@@ -97,9 +104,7 @@ object Matrix {
       for (col <- 0 until lvalue.cols)
         newData(row)(col) = lvalue.data(row)(col) - rvalue.data(row)(col)
 
-    val newMatrix: Matrix = new Matrix(lvalue.rows, lvalue.cols)
-    newMatrix.data_=(newData)
-    newMatrix
+    new Matrix(lvalue.rows, lvalue.cols)(newData)
   }
 
   def crossProduct(lvalue: Matrix, rvalue: Matrix): Matrix = {
@@ -112,16 +117,14 @@ object Matrix {
         for (lcol <- 0 until lvalue.cols)
           newData(lrow)(rcol) += lvalue.data(lrow)(lcol) * rvalue.data(lcol)(rcol)
 
-    val newMatrix: Matrix = new Matrix(lvalue.rows, rvalue.cols)
-    newMatrix.data_=(newData)
-    newMatrix
+    new Matrix(lvalue.rows, rvalue.cols)()
   }
 
   def dotProduct(lvalue: Matrix, rvalue: Matrix): Matrix = {
     if (lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols)
       throw new MatrixException("Cannot perform dot product on matrices of differing degrees")
 
-    Matrix.crossProduct(lvalue, rvalue.transpose)
+    new Matrix(1, 1)()
   }
 
   def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean = {
