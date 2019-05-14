@@ -20,18 +20,18 @@ public class MatrixPanelWithLabels extends ScrollPane implements IMatrixPanel {
         matrixPanel.setLayout(new GridBagLayout());
         matrixPanel.removeAll();
         gc.insets = new Insets(1,1,1,1);
-        for(int i = 0; i < _matrix.rows() + 1; i++){
-            for (int j = 0; j < _matrix.cols() + 1; j++){
+        for(int row = 0; row < _matrix.rows() + 1; row++){
+            for (int col = 0; col < _matrix.cols() + 1; col++){
                 gc.weightx = 1.0 / _matrix.cols();
                 gc.weighty = 1.0 / _matrix.rows();
-                gc.gridx = j;
-                gc.gridy = i;
+                gc.gridx = col;
+                gc.gridy = row;
 
-                if(j != 0 && i != 0)
-                    matrixPanel.add(new JTextField(Double.toString(_matrix.index(i-1,j-1)),4), gc);
-                else if (j == 0 && i == 0) matrixPanel.add(new JLabel(""), gc);
-                else if (i == 0) matrixPanel.add(new JLabel("" + (j-1)), gc);
-                else if (j == 0) matrixPanel.add(new JLabel("" + (i-1)), gc);
+                if(col != 0 && row != 0)
+                    matrixPanel.add(new JTextField(Double.toString(_matrix.index(row-1,col-1)),4), gc);
+                else if (col == 0 && row == 0) matrixPanel.add(new JLabel(""), gc);
+                else if (row == 0) matrixPanel.add(new JLabel("" + (col-1)), gc);
+                else if (col == 0) matrixPanel.add(new JLabel("" + (row-1)), gc);
 
             }
         }

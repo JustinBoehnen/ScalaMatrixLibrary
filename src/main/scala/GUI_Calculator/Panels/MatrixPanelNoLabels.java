@@ -20,14 +20,14 @@ public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
         matrixPanel.setLayout(new GridBagLayout());
         matrixPanel.removeAll();
         gc.insets = new Insets(1,1,1,1);
-        for(int i = 0; i < _matrix.rows(); i++){
-            for (int j = 0; j < _matrix.cols(); j++){
+        for(int row = 0; row < _matrix.rows(); row++){
+            for (int col = 0; col < _matrix.cols(); col++){
                 gc.weightx = 1.0 / _matrix.cols();
                 gc.weighty = 1.0 / _matrix.rows();
-                gc.gridx = j;
-                gc.gridy = i;
+                gc.gridx = col;
+                gc.gridy = row;
 
-                matrixPanel.add(new JTextField(Double.toString(_matrix.index(i,j)),4), gc);
+                matrixPanel.add(new JTextField(Double.toString(_matrix.index(row,col)),4), gc);
             }
         }
         this.add(matrixPanel);
@@ -57,9 +57,9 @@ public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
         try {
             double[][] data = new double[_matrix.rows()][_matrix.cols()];
             int count = 0;
-            for (int i = 0; i < _matrix.rows(); i++) {
-                for (int j = 0; j < _matrix.cols(); j++) {
-                    data[i][j] = Double.parseDouble(((JTextField) matrixPanel.getComponent(count)).getText());
+            for (int row = 0; row < _matrix.rows(); row++) {
+                for (int col = 0; col < _matrix.cols(); col++) {
+                    data[row][col] = Double.parseDouble(((JTextField) matrixPanel.getComponent(count)).getText());
                     count++;
                 }
             }

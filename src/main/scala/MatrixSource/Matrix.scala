@@ -35,9 +35,9 @@ class Matrix(val _rows: Int, val _cols: Int) {
   def transpose: Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(_cols, _rows)
 
-    for (i <- 0 until _rows)
-      for (j <- 0 until _cols)
-        newData(j)(i) = _data(i)(j)
+    for (row <- 0 until _rows)
+      for (col <- 0 until _cols)
+        newData(col)(row) = _data(row)(col)
 
     val matrix = new Matrix(_cols, _rows)
     matrix.data_=(newData)
@@ -45,18 +45,18 @@ class Matrix(val _rows: Int, val _cols: Int) {
   }
 
   def traverse (func: Double => Unit): Unit = {
-    for(i <- 0 until _rows)
-      for(j <- 0 until _cols)
-        func(_data(i)(j))
+    for(row <- 0 until _rows)
+      for(col <- 0 until _cols)
+        func(_data(row)(col))
   }
 
 
   def transform (func: Double => Double): Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
 
-    for(i <- 0 until _rows)
-      for(j <- 0 until _cols)
-        newData(i)(j) = func(_data(i)(j))
+    for(row <- 0 until _rows)
+      for(col <- 0 until _cols)
+        newData(row)(col) = func(_data(row)(col))
 
     val newMatrix = new Matrix(_rows, _cols)
     newMatrix.data_=(newData)
@@ -65,9 +65,9 @@ class Matrix(val _rows: Int, val _cols: Int) {
 
   def printMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
 
-  def index(x: Int, y: Int): Double = {
-    if(x >= _rows || x < 0 || y >= _cols || y < 0) throw new MatrixException("Index out of bounds");
-    _data(x)(y)
+  def index(row: Int, col: Int): Double = {
+    if(row >= _rows || row < 0 || col >= _cols || col < 0) throw new MatrixException("Index out of bounds");
+    _data(row)(col)
   }
 }
 
@@ -78,9 +78,9 @@ object Matrix {
 
     val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, lvalue.cols)
 
-    for(i <- 0 until lvalue.rows)
-      for (j <- 0 until lvalue.cols)
-        newData(i)(j) = lvalue.data(i)(j) + rvalue.data(i)(j)
+    for(row <- 0 until lvalue.rows)
+      for (col <- 0 until lvalue.cols)
+        newData(row)(col) = lvalue.data(row)(col) + rvalue.data(row)(col)
 
     val newMatrix: Matrix = new Matrix(lvalue.rows, lvalue.cols)
     newMatrix.data_=(newData)
@@ -93,9 +93,9 @@ object Matrix {
 
     val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, lvalue.cols)
 
-    for(i <- 0 until lvalue.rows)
-      for (j <- 0 until lvalue.cols)
-        newData(i)(j) = lvalue.data(i)(j) - rvalue.data(i)(j)
+    for(row <- 0 until lvalue.rows)
+      for (col <- 0 until lvalue.cols)
+        newData(row)(col) = lvalue.data(row)(col) - rvalue.data(row)(col)
 
     val newMatrix: Matrix = new Matrix(lvalue.rows, lvalue.cols)
     newMatrix.data_=(newData)
@@ -107,10 +107,10 @@ object Matrix {
 
     val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, rvalue.cols)
 
-    for (i <- 0 until lvalue.rows)
-      for (j <- 0 until rvalue.cols)
-        for (k <- 0 until lvalue.cols)
-          newData(i)(j) += lvalue.data(i)(k) * rvalue.data(k)(j)
+    for (lrow <- 0 until lvalue.rows)
+      for (rcol <- 0 until rvalue.cols)
+        for (lcol <- 0 until lvalue.cols)
+          newData(lrow)(rcol) += lvalue.data(lrow)(lcol) * rvalue.data(lcol)(rcol)
 
     val newMatrix: Matrix = new Matrix(lvalue.rows, rvalue.cols)
     newMatrix.data_=(newData)
@@ -129,9 +129,9 @@ object Matrix {
 
     if(lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols) isEqual = false
     else
-      for (i <- 0 until lvalue.rows)
-        for (j <- 0 until lvalue.cols)
-          if (lvalue.data(i)(j) != rvalue.data(i)(j)) isEqual = false
+      for (row <- 0 until lvalue.rows)
+        for (col <- 0 until lvalue.cols)
+          if (lvalue.data(row)(col) != rvalue.data(row)(col)) isEqual = false
 
     isEqual
   }
