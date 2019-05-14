@@ -30,8 +30,8 @@ public class MainFrame extends JFrame {
         GridBagConstraints gc = new GridBagConstraints();
 
         //panels
-        //MatrixPanel leftMatrix = new MatrixPanel();
-        //MatrixPanel rightMatrix = new MatrixPanel();
+        //MatrixPanelNoLabels leftMatrix = new MatrixPanelNoLabels();
+        //MatrixPanelNoLabels rightMatrix = new MatrixPanelNoLabels();
         MatrixPanelWithLabels leftMatrix = new MatrixPanelWithLabels();
         MatrixPanelWithLabels rightMatrix = new MatrixPanelWithLabels();
         MatrixSettingsPanel leftSettings = new MatrixSettingsPanel(leftMatrix);

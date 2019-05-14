@@ -8,13 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ConsolePanel extends JPanel {
-    private int _xSize = 250;
-    private int _ySize = 250;
-
     private JButton aboutButton = new JButton("ABOUT");
 
     public ConsolePanel(){
-        this.setPreferredSize(new Dimension(_xSize, _ySize));
+        this.setPreferredSize(new Dimension(250, 250));
         Draw();
 
         aboutButton.addActionListener(new ActionListener() {

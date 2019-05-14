@@ -1,24 +1,19 @@
 package GUI_Calculator.Panels;
 
-import MatrixSource.Matrix;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MatrixSettingsPanel extends JPanel {
-    private MatrixPanelWithLabels _panel;
-    private int _xSize = 250;
-    private int _ySize = 250;
-
+    private IMatrixPanel _panel;
     private JTextField rowsText = new JTextField(6);
     private JTextField colsText = new JTextField(6);
     private JButton resetButton = new JButton("RESET");
 
-    public MatrixSettingsPanel(MatrixPanelWithLabels panel){
+    public MatrixSettingsPanel(IMatrixPanel panel){
         _panel = panel;
-        this.setPreferredSize(new Dimension(_xSize, _ySize));
+        this.setPreferredSize(new Dimension(250, 250));
         Draw();
 
         resetButton.addActionListener(new ActionListener() {

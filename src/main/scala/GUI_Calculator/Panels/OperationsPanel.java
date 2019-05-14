@@ -8,16 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class OperationsPanel extends JPanel {
-    private int _xSize = 250;
-    private int _ySize = 250;
-
     private JButton addButton = new JButton("ADD");
     private JButton subButton = new JButton("SUB");
     private JButton crossButton = new JButton("CROSS");
     private JButton dotButton = new JButton("DOT");
 
-    public OperationsPanel(MatrixPanelWithLabels left, MatrixPanelWithLabels right){
-        this.setPreferredSize(new Dimension(_xSize, _ySize));
+    public OperationsPanel(IMatrixPanel left, IMatrixPanel right){
+        this.setPreferredSize(new Dimension(250, 250));
         Draw();
 
         //Listeners

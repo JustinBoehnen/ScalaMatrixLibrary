@@ -8,15 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ResultFrame extends JFrame {
-    Matrix _matrix;
-    private int _xSize = 400;
-    private int _ySize = 400;
+    private Matrix _matrix;
 
     public ResultFrame(Matrix matrix, String opType) {
         super("Result: " + opType);
         _matrix = matrix;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(new Dimension(_xSize, _ySize));
+        this.setSize(new Dimension(400, 400));
         Draw();
     }
 

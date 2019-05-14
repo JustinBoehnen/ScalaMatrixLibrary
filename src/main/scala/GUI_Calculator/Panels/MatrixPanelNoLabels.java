@@ -1,21 +1,18 @@
 package GUI_Calculator.Panels;
 
 import MatrixSource.Matrix;
-import scala.Int;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MatrixPanel extends ScrollPane {
+public class MatrixPanelNoLabels extends ScrollPane implements IMatrixPanel {
     private Matrix _matrix;
-    private int _xSize = 250;
-    private int _ySize = 250;
-    JPanel matrixPanel = new JPanel();
-    GridBagConstraints gc = new GridBagConstraints();
+    private JPanel matrixPanel = new JPanel();
+    private GridBagConstraints gc = new GridBagConstraints();
 
-    public MatrixPanel(){
+    public MatrixPanelNoLabels(){
         _matrix = new Matrix(3,3);
-        this.setPreferredSize(new Dimension(_xSize, _ySize));
+        this.setPreferredSize(new Dimension(250, 250));
         Draw();
     }
 
