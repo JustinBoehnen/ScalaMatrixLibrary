@@ -78,14 +78,14 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
     new Matrix(_rows, _cols)(newData)
   }
 
-  def ReduceSum(): Matrix = {
-    val newData: Array[Array[Double]] = Array.ofDim(_rows, 1)
+  def ReduceSum(): Double = {
+    var data: Double = 0
 
     for (row <- 0 until _rows)
-      for (i <- 0 until _cols)
-        newData(row)(0) += _data(row)(i)
+      for (col <- 0 until _cols)
+        data += _data(row)(col)
 
-    new Matrix(_rows, 1)(newData)
+    data
   }
 
   def PrintMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
