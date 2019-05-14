@@ -1,5 +1,7 @@
-package GUI_Calculator.Panels;
+package GUI_Calculator;
 
+import GUI_Calculator.Panels.MatrixPanelNoLabels;
+import GUI_Calculator.Panels.MatrixPanelWithLabels;
 import MatrixSource.Matrix;
 
 import javax.swing.*;
@@ -15,10 +17,6 @@ public class ResultFrame extends JFrame {
         _matrix = matrix;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(new Dimension(400, 400));
-        Draw();
-    }
-
-    public void Draw(){
         MatrixPanelWithLabels resPan = new MatrixPanelWithLabels();
         resPan.SetMatrix(_matrix);
         this.add(resPan);

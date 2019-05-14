@@ -1,5 +1,6 @@
 package GUI_Calculator.Panels;
 
+import GUI_Calculator.ResultFrame;
 import MatrixSource.Matrix;
 
 import javax.swing.*;
