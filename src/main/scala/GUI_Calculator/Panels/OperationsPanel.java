@@ -93,4 +93,3 @@ public class OperationsPanel extends JPanel {
         this.add(dotButton,gc);
     }
 }
-

@@ -45,4 +45,3 @@ public class ConsolePanel extends JPanel {
         this.add(aboutButton, gc);
     }
 }
-

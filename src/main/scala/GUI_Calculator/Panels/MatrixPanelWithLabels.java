@@ -77,4 +77,3 @@ public class MatrixPanelWithLabels extends ScrollPane implements IMatrixPanel {
         }
     }
 }
-
