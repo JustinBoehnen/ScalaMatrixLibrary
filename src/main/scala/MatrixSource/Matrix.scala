@@ -108,7 +108,7 @@ object Matrix {
     new Matrix(lvalue.rows, lvalue.cols)(newData)
   }
 
-  def crossProduct(lvalue: Matrix, rvalue: Matrix): Matrix = {
+  def multiply(lvalue: Matrix, rvalue: Matrix): Matrix = {
     if (lvalue.cols != rvalue.rows) throw new MatrixException("cross product lvalue columns must equal rvalue rows")
 
     val newData: Array[Array[Double]] = Array.ofDim(lvalue.rows, rvalue.cols)
@@ -119,13 +119,6 @@ object Matrix {
           newData(lrow)(rcol) += lvalue.data(lrow)(lcol) * rvalue.data(lcol)(rcol)
 
     new Matrix(lvalue.rows, rvalue.cols)(newData)
-  }
-
-  def dotProduct(lvalue: Matrix, rvalue: Matrix): Matrix = {
-    if (lvalue.rows != rvalue.rows || lvalue.cols != rvalue.cols)
-      throw new MatrixException("Cannot perform dot product on matrices of differing degrees")
-
-    new Matrix(1, 1)()
   }
 
   def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean = {
