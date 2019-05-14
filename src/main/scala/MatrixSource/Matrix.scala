@@ -59,14 +59,12 @@ class Matrix(val _rows: Int, val _cols: Int)( var _data: Array[Array[Double]] = 
     new Matrix(_rows, _cols)(newData)
   }
 
-  def rowSwap (lrow: Int, rrow: Int): Matrix = {
-    val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
+  def rowSwap (rowA: Int, rowB: Int): Matrix = {
+    if (rowA >= _rows || rowA >= _rows || rowB < 0 || rowB < 0) throw new MatrixException("Specified row out of bounds")
 
-    if (lrow >= _rows || rrow >= _rows || lrow < 0 || rrow < 0) throw new MatrixException("Specified row out of bounds")
-    newData(rrow) = data(lrow)
-    newData(lrow) = data(rrow)
-
-    for (row <- 0 until _rows) if (row != lrow && row != rrow) newData(row) = data(row)
+    val newData: Array[Array[Double]] = _data.clone()
+    newData(rowA) = _data(rowB)
+    newData(rowB) = _data(rowA)
 
     new Matrix(_rows, _cols)(newData)
   }
