@@ -1,7 +1,5 @@
 package MatrixSource
 
-import scala.runtime.Nothing$
-
 /*
 Class: Matrix
 
