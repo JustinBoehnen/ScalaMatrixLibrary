@@ -66,7 +66,7 @@ class Matrix(val _rows: Int, val _cols: Int)( var _data: Array[Array[Double]] = 
     newData(rrow) = data(lrow)
     newData(lrow) = data(rrow)
 
-    for (row <- 0 until _rows) if (row != lrow || row != rrow) newData(row) = data(row)
+    for (row <- 0 until _rows) if (row != lrow && row != rrow) newData(row) = data(row)
 
     new Matrix(_rows, _cols)(newData)
   }
