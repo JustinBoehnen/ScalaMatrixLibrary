@@ -12,26 +12,11 @@ Methods:
   def transpose: Matrix - does the transpose operation
     on the matrix; returns a new matrix
 */
-class Matrix(val _rows: Int, val _cols: Int)( var _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)) {
+class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)) {
   def rows: Int = _rows
   def cols: Int = _cols
 
   def data:Array[Array[Double]] = _data
-  def data_= (value: Array[Array[Double]]): Unit = {
-    var rowWrong: Int = 0;
-    var colWrong: Int = 0;
-    if(value.length != _rows) rowWrong = 1;
-    for (list <- value) if (list.length != _cols) colWrong = 1;
-
-    if(rowWrong == 1 && colWrong == 1)
-      throw new MatrixException("Incorrect row and column assignment dimensions: expected row:" + _rows + ", col:" + _cols);
-    else if (rowWrong == 1)
-      throw new MatrixException("Incorrect row assignment dimension: expected " + _rows);
-    else if (colWrong == 1)
-      throw new MatrixException("Incorrect column assignment dimension: expected " + _cols);
-
-    _data = value
-  }
 
   def transpose: Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(_cols, _rows)
@@ -67,6 +52,16 @@ class Matrix(val _rows: Int, val _cols: Int)( var _data: Array[Array[Double]] = 
     newData(rowB) = _data(rowA)
 
     new Matrix(_rows, _cols)(newData)
+  }
+
+  def reduceSum (): Matrix = {
+    val newData: Array[Array[Double]] = Array.ofDim(_rows, 1)
+
+    for (row <- 0 until _rows)
+      for (i <- 0 until _cols)
+        newData(row)(0) += _data(row)(i)
+
+    new Matrix(_rows, 1)(newData)
   }
 
   def printMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
