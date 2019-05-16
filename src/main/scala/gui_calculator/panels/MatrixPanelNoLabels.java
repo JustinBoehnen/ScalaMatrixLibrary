@@ -1,6 +1,6 @@
 package gui_calculator.panels;
 
-import MatrixSource.Matrix;
+import matrix_source.Matrix;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-import MatrixSource._
+import matrix_source._
 import scala.math
 
 object Main {

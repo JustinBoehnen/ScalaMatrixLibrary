@@ -1,4 +1,4 @@
-package MatrixSource
+package matrix_source
 
 /*
 Class: Matrix

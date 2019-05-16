@@ -1,5 +1,5 @@
 import org.scalatest._
-import MatrixSource._
+import matrix_source._
 
 class MatrixTests extends FlatSpec {
   "Matrix.add" should "add two matrices together" in {
