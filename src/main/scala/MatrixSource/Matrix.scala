@@ -48,24 +48,10 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
         visit(_data(row)(col))
   }
 
-  def Transform(visit: Double => Double): Matrix = {
-    val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
-
-    for(row <- 0 until _rows)
-      for(col <- 0 until _cols)
-        newData(row)(col) = visit(_data(row)(col))
-
-    new Matrix(_rows, _cols)(newData)
-  }
+  def Transform(visit: Double => Double): Matrix = new Matrix(_rows, _cols)(_data.map(_.map(f => visit(f))))
 
   def TransformRow(rowPassed: Int, visit: Double => Double): Matrix = {
-    val newData: Array[Array[Double]] = Array.ofDim(_rows, _cols)
-
-    for (row <- 0 until _rows)
-      for (col <- 0 until _cols)
-        newData(row)(col) = if (rowPassed == row) visit(_data(row)(col)) else _data(row)(col)
-
-    new Matrix(_rows, _cols)(newData)
+    new Matrix(_rows, _cols)(_data.zipWithIndex.map(ell => if (ell._2 == rowPassed) ell._1.map(f => visit(f)) else ell._1))
   }
 
   def RowSwap(rowA: Int, rowB: Int): Matrix = {
@@ -78,20 +64,12 @@ class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = A
     new Matrix(_rows, _cols)(newData)
   }
 
-  def ReduceSum(): Double = {
-    var data: Double = 0
-
-    for (row <- 0 until _rows)
-      for (col <- 0 until _cols)
-        data += _data(row)(col)
-
-    data
-  }
+  def ReduceSum(): Double = _data.flatten.sum
 
   def PrintMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
 
   def Index(row: Int, col: Int): Double = {
-    if(row >= _rows || row < 0 || col >= _cols || col < 0) throw new MatrixException("Index out of bounds");
+    if(row >= _rows || row < 0 || col >= _cols || col < 0) throw new MatrixException("Index out of bounds")
     _data(row)(col)
   }
 
