@@ -1,8 +1,7 @@
 # ScalaMatrixLibrary
 A matrix library for Scala that supports various matrix operations
 
-Documentation
-======
+## Documentation
 
 **Transpose: Matrix** - this method transposes the Matrix, turning all rows into columns and columns into rows; these changes are returned in a new Matrix
 
