@@ -24,7 +24,7 @@ public class OperationsPanel extends JPanel {
                 try {
                     left.storeData(); right.storeData();
                     ResultFrame res = new ResultFrame(Matrix.add(left.getMatrix(), right.getMatrix()), "Addition");
-                    res.showResult();
+                    res.toggleVisible();
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "addButton.addActionListener:\n"
@@ -38,7 +38,7 @@ public class OperationsPanel extends JPanel {
                 try {
                     left.storeData(); right.storeData();
                     ResultFrame res = new ResultFrame(Matrix.subtract(left.getMatrix(), right.getMatrix()), "Subtraction");
-                    res.showResult();
+                    res.toggleVisible();
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "subButton.addActionListener:\n"
@@ -52,7 +52,7 @@ public class OperationsPanel extends JPanel {
                 try {
                     left.storeData(); right.storeData();
                     ResultFrame res = new ResultFrame(Matrix.multiply(left.getMatrix(), right.getMatrix()), "Cross Product");
-                    res.showResult();
+                    res.toggleVisible();
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "crossButton.addActionListener:\n"

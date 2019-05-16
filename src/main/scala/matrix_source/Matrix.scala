@@ -27,6 +27,9 @@ Methods:
     an array of Int
 */
 class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Array.ofDim(rows, cols)) {
+  if(data.length != rows) throw new MatrixException("Passed array has incorrect row dimensions")
+  else data.foreach(row => if (row.length != cols) throw new MatrixException("Passed array has incorrect column dimensions"))
+
   def Rows: Int = rows
   def Cols: Int = cols
 
@@ -56,7 +59,7 @@ class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Arra
   }
 
   def RowSwap(rowA: Int, rowB: Int): Matrix = {
-    if (rowA >= rows || rowA >= rows || rowB < 0 || rowB < 0) throw new MatrixException("Specified row out of bounds")
+    if (rowA >= rows || rowB >= rows || rowA < 0 || rowB < 0) throw new MatrixException("Specified row out of bounds")
 
     val newData: Array[Array[Double]] = data.clone()
     newData(rowA) = data(rowB)
@@ -137,6 +140,7 @@ object Matrix {
 
   def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean = {
     var isEqual: Boolean = true
+
 
     if(lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols) isEqual = false
     else
