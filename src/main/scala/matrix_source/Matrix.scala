@@ -51,7 +51,7 @@ class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Arra
   def Transform(visit: Double => Double): Matrix = new Matrix(rows, cols)(data.map(_.map(f => visit(f))))
 
   def TransformRow(rowPassed: Int, visit: Double => Double): Matrix = {
-    val newData: Array[Array[Double]] = data.zipWithIndex.map(ell => if (ell._2 == rowPassed) ell._1.map(f => visit(f)) else ell._1)
+    val newData: Array[Array[Double]] = data.zipWithIndex.map(ell => if (ell._2 == rowPassed) { val row = ell._1.map(f => visit(f)); row} else ell._1)
     new Matrix(rows, cols)(newData)
   }
 

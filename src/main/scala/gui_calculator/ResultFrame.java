@@ -16,7 +16,7 @@ public class ResultFrame extends JFrame {
         this.add(resPan);
     }
 
-    public void Show() {
+    public void showResult() {
         this.setVisible(true);
     }
 }
