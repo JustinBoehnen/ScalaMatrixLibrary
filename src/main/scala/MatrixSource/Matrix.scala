@@ -26,54 +26,55 @@ Methods:
   def GetSize: Array[Int] - returns the size of the matrix as
     an array of Int
 */
-class Matrix(val _rows: Int, val _cols: Int)(val _data: Array[Array[Double]] = Array.ofDim(_rows, _cols)) {
-  def Rows: Int = _rows
-  def Cols: Int = _cols
+class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Array.ofDim(rows, cols)) {
+  def Rows: Int = rows
+  def Cols: Int = cols
 
-  def Data:Array[Array[Double]] = _data
+  def Data:Array[Array[Double]] = data
 
   def Transpose: Matrix = {
-    val newData: Array[Array[Double]] = Array.ofDim(_cols, _rows)
+    val newData: Array[Array[Double]] = Array.ofDim(cols, rows)
 
-    for (row <- 0 until _rows)
-      for (col <- 0 until _cols)
-        newData(col)(row) = _data(row)(col)
+    for (row <- 0 until rows)
+      for (col <- 0 until cols)
+        newData(col)(row) = data(row)(col)
 
-    new Matrix(_cols, _rows)(newData)
+    new Matrix(cols, rows)(newData)
   }
 
   def Traverse(visit: Double => Unit): Unit = {
-    for(row <- 0 until _rows)
-      for(col <- 0 until _cols)
-        visit(_data(row)(col))
+    for(row <- 0 until rows)
+      for(col <- 0 until cols)
+        visit(data(row)(col))
   }
 
-  def Transform(visit: Double => Double): Matrix = new Matrix(_rows, _cols)(_data.map(_.map(f => visit(f))))
+  def Transform(visit: Double => Double): Matrix = new Matrix(rows, cols)(data.map(_.map(f => visit(f))))
 
   def TransformRow(rowPassed: Int, visit: Double => Double): Matrix = {
-    new Matrix(_rows, _cols)(_data.zipWithIndex.map(ell => if (ell._2 == rowPassed) ell._1.map(f => visit(f)) else ell._1))
+    val newData: Array[Array[Double]] = data.zipWithIndex.map(ell => if (ell._2 == rowPassed) ell._1.map(f => visit(f)) else ell._1)
+    new Matrix(rows, cols)(newData)
   }
 
   def RowSwap(rowA: Int, rowB: Int): Matrix = {
-    if (rowA >= _rows || rowA >= _rows || rowB < 0 || rowB < 0) throw new MatrixException("Specified row out of bounds")
+    if (rowA >= rows || rowA >= rows || rowB < 0 || rowB < 0) throw new MatrixException("Specified row out of bounds")
 
-    val newData: Array[Array[Double]] = _data.clone()
-    newData(rowA) = _data(rowB)
-    newData(rowB) = _data(rowA)
+    val newData: Array[Array[Double]] = data.clone()
+    newData(rowA) = data(rowB)
+    newData(rowB) = data(rowA)
 
-    new Matrix(_rows, _cols)(newData)
+    new Matrix(rows, cols)(newData)
   }
 
-  def ReduceSum(): Double = _data.flatten.sum
+  def ReduceSum(): Double = data.flatten.sum
 
-  def PrintMat(): Unit = for (list <- _data) { for (item <- list) print("[" + item + "]"); println()}
+  def PrintMat(): Unit = for (list <- data) { for (item <- list) print("[" + item + "]"); println()}
 
   def Index(row: Int, col: Int): Double = {
-    if(row >= _rows || row < 0 || col >= _cols || col < 0) throw new MatrixException("Index out of bounds")
-    _data(row)(col)
+    if(row >= rows || row < 0 || col >= cols || col < 0) throw new MatrixException("Index out of bounds")
+    data(row)(col)
   }
 
-  def GetSize(): Array[Int] = Array(_rows, _cols)
+  def GetSize(): Array[Int] = Array(rows, cols)
 }
 
 /*

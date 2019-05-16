@@ -15,7 +15,7 @@ public class OperationsPanel extends JPanel {
 
     public OperationsPanel(IMatrixPanel left, IMatrixPanel right){
         this.setPreferredSize(new Dimension(250, 250));
-        Draw();
+        draw();
 
         //Listeners
         addButton.addActionListener(new ActionListener() {
@@ -59,7 +59,7 @@ public class OperationsPanel extends JPanel {
         });
     }
 
-    public void Draw(){
+    public void draw(){
         this.setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
 

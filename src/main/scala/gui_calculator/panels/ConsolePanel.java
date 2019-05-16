@@ -10,7 +10,7 @@ public class ConsolePanel extends JPanel {
 
     public ConsolePanel(){
         this.setPreferredSize(new Dimension(250, 250));
-        Draw();
+        draw();
 
         aboutButton.addActionListener(new ActionListener() {
             @Override
@@ -35,7 +35,7 @@ public class ConsolePanel extends JPanel {
         });
     }
 
-    public void Draw(){
+    public void draw(){
         this.setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
 

@@ -14,7 +14,7 @@ public class MatrixSettingsPanel extends JPanel {
     public MatrixSettingsPanel(IMatrixPanel panel){
         _panel = panel;
         this.setPreferredSize(new Dimension(250, 250));
-        Draw();
+        draw();
 
         resetButton.addActionListener(new ActionListener() {
             @Override
@@ -42,7 +42,7 @@ public class MatrixSettingsPanel extends JPanel {
         });
     }
 
-    public void Draw(){
+    public void draw(){
         this.setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
 
