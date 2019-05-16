@@ -1,4 +1,4 @@
-package GUI_Calculator.Panels;
+package gui_calculator.panels;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +32,7 @@ public class MatrixSettingsPanel extends JPanel {
                                         + "[Matrix dimension must be at least 1]",
                                 "Something is very wrong!",JOptionPane.ERROR_MESSAGE);
                     else
-                        _panel.ResetMatrix(rows, cols);
+                        _panel.resetMatrix(rows, cols);
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "resetButton.addActionListener:\n"
@@ -55,11 +55,11 @@ public class MatrixSettingsPanel extends JPanel {
         this.add(new JLabel("Cols  "),gc);
 
         gc.gridx = 1; gc.gridy = 0;
-        rowsText.setText(Integer.toString(_panel.GetMatrix().Rows()));
+        rowsText.setText(Integer.toString(_panel.getMatrix().Rows()));
         this.add(rowsText,gc);
 
         gc.gridx = 1; gc.gridy = 1;
-        colsText.setText(Integer.toString(_panel.GetMatrix().Cols()));
+        colsText.setText(Integer.toString(_panel.getMatrix().Cols()));
         this.add(colsText,gc);
 
         gc.fill = GridBagConstraints.HORIZONTAL;

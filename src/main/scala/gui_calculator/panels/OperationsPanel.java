@@ -1,6 +1,6 @@
-package GUI_Calculator.Panels;
+package gui_calculator.panels;
 
-import GUI_Calculator.ResultFrame;
+import gui_calculator.ResultFrame;
 import MatrixSource.Matrix;
 
 import javax.swing.*;
@@ -22,8 +22,8 @@ public class OperationsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    left.StoreData(); right.StoreData();
-                    ResultFrame res = new ResultFrame(Matrix.add(left.GetMatrix(), right.GetMatrix()), "Addition");
+                    left.storeData(); right.storeData();
+                    ResultFrame res = new ResultFrame(Matrix.add(left.getMatrix(), right.getMatrix()), "Addition");
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "addButton.addActionListener:\n"
@@ -35,8 +35,8 @@ public class OperationsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    left.StoreData(); right.StoreData();
-                    ResultFrame res = new ResultFrame(Matrix.subtract(left.GetMatrix(), right.GetMatrix()), "Subtraction");
+                    left.storeData(); right.storeData();
+                    ResultFrame res = new ResultFrame(Matrix.subtract(left.getMatrix(), right.getMatrix()), "Subtraction");
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "subButton.addActionListener:\n"
@@ -48,8 +48,8 @@ public class OperationsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    left.StoreData(); right.StoreData();
-                    ResultFrame res = new ResultFrame(Matrix.multiply(left.GetMatrix(), right.GetMatrix()), "Cross Product");
+                    left.storeData(); right.storeData();
+                    ResultFrame res = new ResultFrame(Matrix.multiply(left.getMatrix(), right.getMatrix()), "Cross Product");
                 }
                 catch (Exception err){
                     JOptionPane.showMessageDialog(null, "crossButton.addActionListener:\n"

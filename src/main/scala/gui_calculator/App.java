@@ -1,6 +1,4 @@
-package GUI_Calculator;
-
-import sun.applet.Main;
+package gui_calculator;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;

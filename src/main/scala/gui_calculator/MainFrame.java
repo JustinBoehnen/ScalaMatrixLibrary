@@ -1,11 +1,8 @@
-package GUI_Calculator;
+package gui_calculator;
 
-import GUI_Calculator.Panels.*;
-import MatrixSource.Matrix;
+import gui_calculator.panels.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
