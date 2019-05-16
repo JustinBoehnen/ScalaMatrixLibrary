@@ -17,7 +17,7 @@ A matrix library for Scala that supports various matrix operations
 
 **Index(row: Int, col: Int): Double** - returns the value of the data stored at the given indices
 
-**GetSize: Array[Int]** - returns the size of the Matrix as an Array
+**GetSize: Array\[Int]** - returns the size of the Matrix as an Array
 
 **Add(lvalue: Matrix, rvalue: Matrix): Matrix** - adds two matrices together, returning the resulting matrix.
 
