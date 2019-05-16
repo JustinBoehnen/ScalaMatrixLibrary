@@ -14,6 +14,9 @@ public class ResultFrame extends JFrame {
         MatrixPanelWithLabels resPan = new MatrixPanelWithLabels();
         resPan.setMatrix(matrix);
         this.add(resPan);
+    }
+
+    public void Show() {
         this.setVisible(true);
     }
 }
