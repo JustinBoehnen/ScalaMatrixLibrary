@@ -45,11 +45,7 @@ class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Arra
     new Matrix(cols, rows)(newData)
   }
 
-  def Traverse(visit: Double => Unit): Unit = {
-    for(row <- 0 until rows)
-      for(col <- 0 until cols)
-        visit(data(row)(col))
-  }
+  def Traverse(visit: Double => Unit): Unit = data.flatten.foreach(f => visit(f))
 
   def Transform(visit: Double => Double): Matrix = new Matrix(rows, cols)(data.map(_.map(f => visit(f))))
 
@@ -101,28 +97,16 @@ Methods:
 object Matrix {
   def add(lvalue: Matrix, rvalue: Matrix): Matrix = {
     if (lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols)
-      throw new MatrixException("Cannot add matrices of differing degrees")
+      throw new MatrixException("Cannot subtract matrices of differing degrees")
 
-    val newData: Array[Array[Double]] = Array.ofDim(lvalue.Rows, lvalue.Cols)
-
-    for(row <- 0 until lvalue.Rows)
-      for (col <- 0 until lvalue.Cols)
-        newData(row)(col) = lvalue.Data(row)(col) + rvalue.Data(row)(col)
-
-    new Matrix(lvalue.Rows, lvalue.Cols)(newData)
+    new Matrix(lvalue.rows, lvalue.cols)((lvalue.data zip rvalue.data).map(row => row._1 zip row._2).map(_.map(tup => tup._1 + tup._2)))
   }
 
   def subtract(lvalue: Matrix, rvalue: Matrix): Matrix = {
     if (lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols)
       throw new MatrixException("Cannot subtract matrices of differing degrees")
 
-    val newData: Array[Array[Double]] = Array.ofDim(lvalue.Rows, lvalue.Cols)
-
-    for(row <- 0 until lvalue.Rows)
-      for (col <- 0 until lvalue.Cols)
-        newData(row)(col) = lvalue.Data(row)(col) - rvalue.Data(row)(col)
-
-    new Matrix(lvalue.Rows, lvalue.Cols)(newData)
+    new Matrix(lvalue.rows, lvalue.cols)((lvalue.data zip rvalue.data).map(row => row._1 zip row._2).map(_.map(tup => tup._1 - tup._2)))
   }
 
   def multiply(lvalue: Matrix, rvalue: Matrix): Matrix = {
@@ -140,7 +124,6 @@ object Matrix {
 
   def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean = {
     var isEqual: Boolean = true
-
 
     if(lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols) isEqual = false
     else
