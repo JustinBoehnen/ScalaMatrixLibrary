@@ -123,15 +123,8 @@ object Matrix {
   }
 
   def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean = {
-    var isEqual: Boolean = true
-
-    if(lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols) isEqual = false
-    else
-      for (row <- 0 until lvalue.Rows)
-        for (col <- 0 until lvalue.Cols)
-          if (lvalue.Data(row)(col) != rvalue.Data(row)(col)) isEqual = false
-
-    isEqual
+    if(lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols) false
+    else lvalue.data.flatten.deep == rvalue.data.flatten.deep
   }
 
   def identity(dim: Int): Matrix = {
