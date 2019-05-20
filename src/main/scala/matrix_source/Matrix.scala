@@ -33,6 +33,8 @@ class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Arra
   def Rows: Int = rows
   def Cols: Int = cols
 
+  def this(copy: Matrix) = this(copy.rows, copy.cols)(copy.data)
+
   def Data:Array[Array[Double]] = data
 
   def Transpose: Matrix = {
