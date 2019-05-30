@@ -27,15 +27,16 @@ Methods:
     an array of Int
 */
 class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Array.ofDim(rows, cols)) {
-  if(data.length != rows) throw new MatrixException("Passed array has incorrect row dimensions")
+  if (data.length != rows) throw new MatrixException("Passed array has incorrect row dimensions")
   else data.foreach(row => if (row.length != cols) throw new MatrixException("Passed array has incorrect column dimensions"))
 
   def Rows: Int = rows
+
   def Cols: Int = cols
 
   def this(copy: Matrix) = this(copy.rows, copy.cols)(copy.data)
 
-  def Data:Array[Array[Double]] = data
+  def Data: Array[Array[Double]] = data
 
   def Transpose: Matrix = {
     val newData: Array[Array[Double]] = Array.ofDim(cols, rows)
@@ -52,7 +53,7 @@ class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Arra
   def Transform(visit: Double => Double): Matrix = new Matrix(rows, cols)(data.map(_.map(f => visit(f))))
 
   def TransformRow(rowPassed: Int, visit: Double => Double): Matrix = {
-    val newData: Array[Array[Double]] = data.zipWithIndex.map(ell => if (ell._2 == rowPassed) { val row = ell._1.map(f => visit(f)); row} else ell._1)
+    val newData: Array[Array[Double]] = data.zipWithIndex.map(ell => if (ell._2 == rowPassed) ell._1.map(f => visit(f)) else ell._1)
     new Matrix(rows, cols)(newData)
   }
 
@@ -68,10 +69,12 @@ class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Arra
 
   def ReduceSum(): Double = data.flatten.sum
 
-  def PrintMat(): Unit = for (list <- data) { for (item <- list) print("[" + item + "]"); println()}
+  def PrintMat(): Unit = for (list <- data) {
+    for (item <- list) print("[" + item + "]"); println()
+  }
 
   def Index(row: Int, col: Int): Double = {
-    if(row >= rows || row < 0 || col >= cols || col < 0) throw new MatrixException("Index out of bounds")
+    if (row >= rows || row < 0 || col >= cols || col < 0) throw new MatrixException("Index out of bounds")
     data(row)(col)
   }
 
@@ -82,18 +85,18 @@ class Matrix(val rows: Int, val cols: Int)(val data: Array[Array[Double]] = Arra
 Object: Matrix - companion class
 
 Methods:
-  def add(lvalue: Matrix, rvalue: Matrix): Matrix - adds two
+  def add (lvalue: Matrix, rvalue: Matrix): Matrix - adds two
     matrices together, returning the resulting matrix
-  def subtract(lvalue: Matrix, rvalue: Matrix): Matrix - subtracts
+  def subtract (lvalue: Matrix, rvalue: Matrix): Matrix - subtracts
     rvalue matrix from lvalue matrix, returning the resulting
     matrix
-  def multiply(lvalue: Matrix, rvalue: Matrix): Matrix - multiplies
+  def multiply (lvalue: Matrix, rvalue: Matrix): Matrix - multiplies
     two matrices together, returning the cross product of the
     matrices
-  def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean - evaluates
+  def areEqual (lvalue: Matrix, rvalue: Matrix): Boolean - evaluates
     whether lvalue and rvalue are identical matrices and returns the
     verdict
-  def identity(dim: Int): Matrix - returns and identity matrix of
+  def identity (dim: Int): Matrix - returns and identity matrix of
     size dim
 */
 object Matrix {
@@ -125,7 +128,7 @@ object Matrix {
   }
 
   def areEqual(lvalue: Matrix, rvalue: Matrix): Boolean = {
-    if(lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols) false
+    if (lvalue.Rows != rvalue.Rows || lvalue.Cols != rvalue.Cols) false
     else lvalue.data.flatten.deep == rvalue.data.flatten.deep
   }
 
