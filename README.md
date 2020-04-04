@@ -30,4 +30,4 @@ A matrix library for Scala that supports various matrix operations
 
 **AreEqual (lvalue: Matrix, rvalue: Matrix): Boolean** - evaluates whether lvalue and rvalue are identical matrices and returns the verdict.
 
-**Identity (dim: Int): Matrix** - returns and identity matrix of size dim.
+**Identity (dim: Int): Matrix** - returns an identity matrix of size dim.
